@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.6in]{geometry}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\begin{document}
+
+\section{Lane-Emden Equation and Polytropes}
+
+\subsection*{a}
+
+First distribute the outer derivative in the Lane-Emden equation and then multiply through by \(\xi^2\):
+
+\[ 2\theta'+\xi\theta'' + \xi\theta_n^n = 0
+\]
+
+Substitute the Taylor series \( \theta_n= \sum\limits_{k=0}^\infty a_k \xi^k \) and \( \theta_n^n= \sum\limits_{k=0}^\infty c_k \xi^k \) (written this way to avoid typing a lot of derivatives evaluated at \(\xi=0\)) to find\\
+
+\[\sum\limits_{k=1}^\infty 2a_k k \xi^{k-1}  + \sum\limits_{k=2}^\infty k(k-1)a_k \xi^{k-1} +  \sum\limits_{k=0}^\infty c_k \xi^{k+1} = 0
+\]\\
+
+We have \(\theta'(0) = 0\) as a boundary condition, so we know \(a_1 = 0\), and the first sum can start from \(k=2\). Shifting the index on the last sum,
+
+\[ \sum\limits_{k=2}^\infty \left(2a_{k}k +a_k k(k-1) + c_{k-2}\right)\xi^{k-1} = 0
+\]
+
+The \(c_k\)'s are pretty tedious to compute in terms of the \(a_k\)'s, but the first few are easy. Recalling \(a_0 = 1\) is a boundary condition, it's obvious that \(  \left(a_0+a_1\xi+ a_2\xi^2\right)^n = \left( 1+a_2\xi^2 \right)^n = 1 + a_2 n \xi^2 + O(\xi^4)\), which yields \(c_0 = 1\), \(c_1 = 0\), and \(c_2 = na_2\). Substituting into the above up to \(k=4\), we end up with the system
+
+\begin{align*}
+6a_2 + 1 &= 0\\
+12a_3 &= 0\\
+20a_4 + na_2 &= 0
+\end{align*}
+
+This gives \(a_2 = -\frac{1}{6}\), \(a_3 = 0\), and \(a_4 = \frac{n}{120}\), whence we can claim near \(\xi=0\) that
+
+\[ \theta \approx 1 - \frac{1}{6}\xi^2 + \frac{n}{120}\xi^4
+\]
+
+I remember somewhere that there should be a recurrence relation for \(c_k\). In principle we could substitute that instead into the above and probably get a recurrence relation for \(a_k\). I'm willing to guess though that the recurrence for \(c_k\) is complicated, or else everyone would have memorized it, since having the coefficients of a power of a power series is a really generally useful thing.
+
+\subsection*{b}
+
+Let's just write the obvious formula for enclosed mass and start changing variables until we get what we're looking for.
+
+\begin{align*}
+m = \int_0^r 4\pi r^3\rho\mathrm{dr} = \int_0^{r}4\pi r_n^3 \xi^3 \rho_c \theta^n_n \mathrm{dr} = 4\pi r_n^3 \rho_c\int_0^{\xi}\xi'^2\theta_n^n\mathrm{d\xi'}
+\end{align*}
+
+Integrating over \(\theta^n\) looks like a bad idea, but we can substitute for it from the Lane-Emden equation:
+
+\[ m = -4\pi \rho_c r_n^3 \int_0^{\xi} \frac{\mathrm{d}}{\mathrm{d\xi'}}\left(\xi'^2\frac{\mathrm{d\theta_n}}{\mathrm{d\xi'}} \right)\mathrm{d\xi'} = -4\pi\rho_c r_n^3 \xi^2 \frac{\mathrm{d\theta_n}}{\mathrm{d\xi}}
+\]
+
+\subsection*{c}
+
+
+
+
+\end{document}
